@@ -5,7 +5,7 @@
 </head>
 <h1>Dashboard</h1>
 
-<p th:text="|Hello there ${user.username}|"></p>
+<p th:text="|Hello there ${user.userName}|"></p>
 
 <form method="post" action="/logout">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
