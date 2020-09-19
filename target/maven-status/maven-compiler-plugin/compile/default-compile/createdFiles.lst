@@ -1,5 +1,6 @@
 com/security/example/demo/domain/service/UserDetailsServiceImpl.class
 com/security/example/demo/domain/entity/Authorities.class
+com/security/example/demo/domain/service/AdminService.class
 com/security/example/demo/web/UserController.class
 com/security/example/demo/infrastructure/configration/SecurityConfiguration.class
 com/security/example/demo/application/UserCustomSecurity.class
