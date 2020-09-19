@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: spring-security-app
+    profiles: local
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/shipment?useSSL=false
+    username: root
+    password:
+  jpa:
+    database: MYSQL
+    hibernate.ddl-auto: update
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    show-sql: true
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
