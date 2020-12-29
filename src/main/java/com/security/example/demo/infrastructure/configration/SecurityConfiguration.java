@@ -40,10 +40,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN") // buradaki admin url ile gelen herkes admin rolüne sahip olmak zorunda. Url Level security
-                .anyRequest().hasAnyRole("USER").and() // anyRequest() geriye kalan diğer istekler ise user rolüne sahip olmalıdır.
+                .anyRequest().hasAnyRole("USER")
+                .anyRequest().authenticated()
+                .and() // anyRequest() geriye kalan diğer istekler ise user rolüne sahip olmalıdır.
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/dashboard")
-                .permitAll();
+                .and().httpBasic()
+                .and()
+                .sessionManagement().maximumSessions(1); //permit one session in same time (We also need some changes in code :))
     }
+
+    //TODO:Örnek basic auth configi yine her şeyi aynı sadece bu iki method farklı
+
+//    private static final String BASIC_AUTH_URL_PREFIX = "/**";
+//    private static final String NOOP = "{noop}";
+//
+//
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers(BASIC_AUTH_URL_PREFIX) Bu prefix ile başlayan bütün urlleri basic auth a sokar
+//                .authenticated()
+//                .and()
+//                .httpBasic();
+//    }
+//
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("apikey")
+//                .password(NOOP + "secretKey")
+//                .roles("USER");
+//    }
 }
